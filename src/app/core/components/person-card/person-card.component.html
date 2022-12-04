@@ -1,0 +1,20 @@
+<div class="mf-person-card">
+    <div class="left-pane">
+        <div>name</div>
+        <div>ID</div>
+        <div>address</div>
+        <div>e-mail</div>
+    </div>
+
+    <div class="right-pane">
+        <div [innerText]="personName"></div>
+        <div [innerText]="personId"></div>
+        <div [innerText]="personAddress"></div>
+        <div [innerText]="personEmail"></div>
+        <button
+            [innerText]="buttonTitle"
+            (click)="onToggleModeClick()"
+            >
+        </button>
+    </div>
+</div>
