@@ -1,5 +1,5 @@
 <div class="mf-app-component">
-    <div class="left">
+    <!-- <div class="left">
         <div>name</div>
         <div>ID</div>
         <div>address</div>
@@ -18,21 +18,27 @@
         with ID = <span [innerText] = "person.id" class="entered"></span>
         you live at <span [innerText] = "person.address" class="entered"></span>
         and have an email <span [innerText] = "person.email" class="entered"></span>
-    </div>
+    </div> -->
+<!-- 
+    <br />
+    <br />
 
-    <br />
-    <br />
-</div>
 
 <div class="clear-fix"></div>
 
-<div [innerHtml]="cardMessage"></div>
+<div [innerHtml]="cardMessage"></div> -->
 
-<mf-person-card 
-    [personName]="person.name"
-    [personId]="person.id"
-    [personAddress]="person.address"
-    [personEmail]="person.email"
-    (onModeChange)="onCardModeChanged($event)"
-    >
-</mf-person-card>
+    <br />
+    <br />
+    <mf-person-card *ngFor="let person of persons; index as i"
+        [(personName)]="person.name"
+        [(personId)]="person.id"
+        [(personAddress)]="person.address"
+        [(personEmail)]="person.email"
+        (onModeChange)="onCardModeChanged($event)"
+        (onSaveClicked)="onSaveClicked()";
+        >
+    </mf-person-card>
+    <div *ngIf="!persons">No data</div>
+</div>
+

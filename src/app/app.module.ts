@@ -5,19 +5,22 @@ import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CoreModule } from "./core/core.module";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
     declarations: [
         AppComponent
     ],
     exports: [
-        FormsModule
+        FormsModule,
+        CommonModule
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        CoreModule
+        CoreModule,
+        CommonModule
     ],
     providers: [],
     bootstrap: [AppComponent]

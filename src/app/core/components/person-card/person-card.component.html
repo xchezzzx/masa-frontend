@@ -7,10 +7,23 @@
     </div>
 
     <div class="right-pane">
-        <div [innerText]="personName"></div>
-        <div [innerText]="personId"></div>
-        <div [innerText]="personAddress"></div>
-        <div [innerText]="personEmail"></div>
+
+        <div *ngIf="mode === ViewMode.ReadOnly">
+        <!-- <div [hidden]="mode !== ViewMode.ReadOnly" class="read-only-wrapper"> -->
+            <div [innerText]="personName"></div>
+            <div [innerText]="personId"></div>
+            <div [innerText]="personAddress"></div>
+            <div [innerText]="personEmail"></div>
+        </div>
+
+        <div *ngIf="mode === ViewMode.Edit">
+            <div><input type="text" [(ngModel)] = "personName" (keyup)="onPersonNameChange()"/></div>
+            <div><input type="number" [(ngModel)] = "personId" (keyup)="onPersonIdChange()" ></div>
+            <div><input type="address" [(ngModel)] = "personAddress" (keyup)="onPersonAddressChange()" ></div>
+            <div><input type="email" [(ngModel)] = "personEmail" (keyup)="onPersonEmailChange()" ></div>
+        </div>
+
+
         <button
             [innerText]="buttonTitle"
             (click)="onToggleModeClick()"
