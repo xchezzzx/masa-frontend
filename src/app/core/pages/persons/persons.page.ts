@@ -1,16 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { Gender, Layout } from "src/app/enums";
-import { LocalStorageKeys } from "../../../constants";
-import { ISelectableOption } from "../../entities";
-import { LocalStorageService } from "../../services/local-storage.service";
-
-interface IPerson {
-    name: string;
-    id: string;
-    address: string;
-    email: string;
-    gender: string;
-}
+import { Layout } from "src/app/enums";
+import { IPerson, ISelectableOption } from "../../../entities";
+import { PersonService } from "../../services/person.service";
 
 @Component({
     selector: "app-persons.page",
@@ -19,10 +10,10 @@ interface IPerson {
 })
     
 export class PersonsPage implements OnInit {
+
     public JSON = JSON;
     public Layout = Layout;
 
-    public persons: IPerson[] | null = [];
     public personOptions: ISelectableOption<IPerson>[] = [];
     public selectedPerson: IPerson | null = null;
 
@@ -31,33 +22,40 @@ export class PersonsPage implements OnInit {
 
     public cardMessage: string = "";
 
-    public genderOptions: string[] = ["Male", "Female"];
-
-    constructor(private localStorageService: LocalStorageService) {}
+    constructor(
+        public personService: PersonService
+    ) { }
 
     public ngOnInit(): void {
-        this.persons = this.localStorageService.get(LocalStorageKeys.PERSONS);
-    }
+        this.layoutOptions.push({
+            title: Layout.Horizontal,
+            value: Layout.Horizontal
+        });
 
-    public onCardModeChanged(isEdit: boolean): void {
-        this.cardMessage = isEdit ? "Please, fill in the data" : "Data saved";
+        this.layoutOptions.push({
+            title: Layout.Vertical,
+            value: Layout.Vertical
+        })
 
-        if (this.persons) {
-            this.personOptions = this.persons?.map((person: IPerson) => {
+        if (this.personService.persons) {
+            this.personOptions = this.personService.persons.map((person: IPerson) => {
                 return {
                     title: person.name,
                     value: person
                 };
             });
 
-            this.selectedPerson = this.persons.length > 0 ? this.persons[0] : null;
-        }
+            this.selectedPerson = this.personService.persons.length > 0 ? this.personService.persons[0] : null;
+        }        
     }
 
+    public onCardModeChanged(isEdit: boolean): void {
+        this.cardMessage = isEdit ? "Please, fill in the data" : "Data saved";
+    }
 
     public onSaveClicked(): void {
         console.log("save clicked");
-        this.localStorageService.set(LocalStorageKeys.PERSONS, this.persons);
+        // this.localStorageService.set(LocalStorageKeys.PERSONS, this.persons);
     }
 
     // public onClickMeClick(): void {

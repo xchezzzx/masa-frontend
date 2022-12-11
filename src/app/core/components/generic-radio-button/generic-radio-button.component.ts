@@ -1,7 +1,7 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
 import { Layout } from "src/app/enums";
 import { v4 as uuidv4 } from "uuid";
-import { ISelectableOption } from "../../entities";
+import { ISelectableOption } from "../../../entities";
 
 @Component({
     selector: "mf-generic-radio-button",
@@ -9,16 +9,18 @@ import { ISelectableOption } from "../../entities";
     styleUrls: ["./generic-radio-button.component.less"],
 })
     
-export class GenericRadioButtonComponent<T> implements OnInit{
+export class GenericRadioButtonComponent<T> implements OnInit, AfterViewInit{
     @Input() value: T | undefined;
     @Input() options: ISelectableOption<T>[] = [];
     @Input() layout: Layout = Layout.Vertical;
+    @Input() isMultiselect: boolean = false;
 
     @Output() valueChange: EventEmitter<T> = new EventEmitter<T>();
 
     @ViewChild("optionWrapper") optionWrapper: ElementRef | undefined;
 
     public Layout = Layout;
+
     public unique: string = uuidv4();
 
     constructor(
@@ -41,6 +43,5 @@ export class GenericRadioButtonComponent<T> implements OnInit{
 
     public onChange(): void {
         this.valueChange.emit(this.value);
-
     }
 }
