@@ -17,6 +17,8 @@
         >
     </mf-generic-radio-button>
     <br />
+    <div [innerHtml]="cardMessage"></div>
+
     <br />
     <mf-person-card
         *ngFor="let person of personService.persons; index as i"

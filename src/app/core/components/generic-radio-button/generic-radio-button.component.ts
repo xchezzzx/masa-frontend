@@ -17,7 +17,7 @@ export class GenericRadioButtonComponent<T> implements OnInit, AfterViewInit{
 
     @Output() valueChange: EventEmitter<T> = new EventEmitter<T>();
 
-    @ViewChild("optionWrapper") optionWrapper: ElementRef | undefined;
+    @ViewChild("optionsWrapper") optionsWrapper: ElementRef | undefined;
 
     public Layout = Layout;
 
@@ -31,13 +31,13 @@ export class GenericRadioButtonComponent<T> implements OnInit, AfterViewInit{
 
     ngOnInit(): void {
         console.log("ngOnInit: ", this.element);
-        console.log("ngOnInit: ", this.optionWrapper)
+        console.log("ngOnInit: ", this.optionsWrapper)
     }
 
     public ngAfterViewInit(): void {
-        console.log("ngAfterViewInit: ", this.optionWrapper);
+        console.log("ngAfterViewInit: ", this.optionsWrapper);
 
-        const wrapper: HTMLDivElement = this.optionWrapper?.nativeElement;
+        const wrapper: HTMLDivElement = this.optionsWrapper?.nativeElement;
         wrapper.style.backgroundColor = "silver";
     }
 
