@@ -1,9 +1,10 @@
 <div class="mf-person-card">
     <div class="left-pane">
-        <div>name</div>
+        <div>Name</div>
         <div>ID</div>
-        <div>address</div>
-        <div>e-mail</div>
+        <div>Address</div>
+        <div>E-mail</div>
+        <div>Gender</div>
     </div>
 
     <div class="right-pane">
@@ -14,20 +15,38 @@
             <div [innerText]="personId"></div>
             <div [innerText]="personAddress"></div>
             <div [innerText]="personEmail"></div>
+            <div [innerText]="personGender"></div>
+            <!-- <div [innerText]="personBirthdate"></div>
+            <div [innerText]="personSalary"></div> -->
         </div>
 
         <div *ngIf="mode === ViewMode.Edit">
-            <div><input type="text" [(ngModel)] = "personName" (keyup)="onPersonNameChange()"/></div>
-            <div><input type="number" [(ngModel)] = "personId" (keyup)="onPersonIdChange()" ></div>
-            <div><input type="address" [(ngModel)] = "personAddress" (keyup)="onPersonAddressChange()" ></div>
-            <div><input type="email" [(ngModel)] = "personEmail" (keyup)="onPersonEmailChange()" ></div>
+            <div>
+                <input type="text" [(ngModel)] = "personName" (keyup)="onPersonNameChange()"/>
+            </div>
+            <div>
+                <input type="text" [(ngModel)] = "personId" (keyup)="onPersonIdChange()" >
+            </div>
+            <div>
+                <input type="text" [(ngModel)] = "personAddress" (keyup)="onPersonAddressChange()" >
+            </div>
+            <div>
+                <input type="email" [(ngModel)] = "personEmail" (keyup)="onPersonEmailChange()" >
+            </div>
+            <mf-radio-button
+                [options]="genderOptions"
+                [(value)]="personGender"
+                (valueChange)="onPersonGenderChange()"
+                ></mf-radio-button>
         </div>
-
-
-        <button
-            [innerText]="buttonTitle"
-            (click)="onToggleModeClick()"
-            >
-        </button>
     </div>
+
+    <div class="clear-both"></div>
+    
+    <button
+        [innerText]="buttonTitle"
+        (click)="onToggleModeClick()"
+        >
+    </button>
 </div>
+<hr />

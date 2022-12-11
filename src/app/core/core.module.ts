@@ -6,6 +6,8 @@ import { States } from "../constants";
 import { PersonCardComponent } from './components/person-card/person-card.component';
 import { PersonsPage } from './pages/persons/persons.page';
 import { Page404 } from './pages/404.page/404.page';
+import { RadioButtonComponent } from "./components/radio-button/radio-button.component";
+import { GenericRadioButtonComponent } from './components/generic-radio-button/generic-radio-button.component';
 
 const routes: Routes = [
     { path: States.persons, component: PersonsPage },
@@ -17,7 +19,9 @@ const routes: Routes = [
     declarations: [
         PersonCardComponent,
         PersonsPage,
-        Page404
+        Page404,
+        RadioButtonComponent,
+        GenericRadioButtonComponent
     ],
     imports: [
         FormsModule,
