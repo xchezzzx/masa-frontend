@@ -5,6 +5,8 @@
         <div>Address</div>
         <div>E-mail</div>
         <div>Gender</div>
+        <div>Birthdate</div>
+        <div>Salary</div>
     </div>
 
     <div class="right-pane">
@@ -16,8 +18,8 @@
             <div [innerText]="personAddress"></div>
             <div [innerText]="personEmail"></div>
             <div [innerText]="personGender"></div>
-            <!-- <div [innerText]="personBirthdate"></div>
-            <div [innerText]="personSalary"></div> -->
+            <div [innerText]="personBirthdate | date : 'dd M yyyy'"></div>
+            <div [innerText]="(personSalary | doubleMe) | currency : 'NIS'"></div>
         </div>
 
         <div *ngIf="mode === ViewMode.Edit">

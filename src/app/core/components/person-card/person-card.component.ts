@@ -17,13 +17,15 @@ const Save: string = "Save";
     
 export class PersonCardComponent implements OnInit{
     @Input() personName: string = "";
-    @Input() personId: string = "";
+    @Input() personId: number = 0;
     @Input() personAddress: string = "";
     @Input() personEmail: string = "";
     @Input() personGender: string = "";
+    @Input() personBirthdate: Date | undefined;
+    @Input() personSalary: number | undefined;
 
     @Output() personNameChange: EventEmitter<string> = new EventEmitter<string>();
-    @Output() personIdChange: EventEmitter<string> = new EventEmitter<string>();
+    @Output() personIdChange: EventEmitter<number> = new EventEmitter<number>();
     @Output() personAddressChange: EventEmitter<string> = new EventEmitter<string>();
     @Output() personEmailChange: EventEmitter<string> = new EventEmitter<string>();
     @Output() personGenderChange: EventEmitter<string> = new EventEmitter<string>();
@@ -84,5 +86,3 @@ export class PersonCardComponent implements OnInit{
         this.buttonTitle = this.mode === ViewMode.ReadOnly ? Edit : Save;
     }
 }
-
-export { ViewMode };

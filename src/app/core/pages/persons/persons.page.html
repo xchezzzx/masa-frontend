@@ -12,22 +12,24 @@
     <mf-generic-radio-button
         [options]="personOptions"
         [layout]="selectedPersonLayout"
+        [isMultiselect]="true"
         [(value)]="selectedPerson"
         >
     </mf-generic-radio-button>
-    {{JSON.stringify(selectedPerson)}}
     <br />
     <br />
     <mf-person-card
-        *ngFor="let person of persons; index as i"
+        *ngFor="let person of personService.persons; index as i"
         [(personName)]="person.name"
         [(personId)]="person.id"
         [(personAddress)]="person.address"
         [(personEmail)]="person.email"
         [(personGender)]="person.gender"
+        [personBirthdate]="person.birthdate"
+        [personSalary]="person.salary"
         (onModeChange)="onCardModeChanged($event)"
         (onSaveClicked)="onSaveClicked()"
     >
     </mf-person-card>
-    <div *ngIf="!persons">No data</div>
+    <div *ngIf="!personService.persons">No data</div>
 </div>
