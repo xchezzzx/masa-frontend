@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { Gender, Layout } from "src/app/enums";
 import { LocalStorageKeys } from "../../../constants";
+import { ISelectableOption } from "../../entities";
 import { LocalStorageService } from "../../services/local-storage.service";
 
 interface IPerson {
@@ -7,6 +9,7 @@ interface IPerson {
     id: string;
     address: string;
     email: string;
+    gender: string;
 }
 
 @Component({
@@ -17,23 +20,18 @@ interface IPerson {
     
 export class PersonsPage implements OnInit {
     public JSON = JSON;
+    public Layout = Layout;
 
-    public persons: IPerson[] | null = [
-        {
-            name: "John Doe",
-            id: "ID757585",
-            address: "Street house",
-            email: "hghgh@hhg.rt"
-          },
-          {
-            name: "Jane Doe",
-            id: "IDhhfhf7585",
-            address: "Street house",
-            email: "jsosos@hhg.rt"
-          }
-    ];
+    public persons: IPerson[] | null = [];
+    public personOptions: ISelectableOption<IPerson>[] = [];
+    public selectedPerson: IPerson | null = null;
+
+    public layoutOptions: ISelectableOption<Layout>[] = [];
+    public selectedPersonLayout: Layout = Layout.Vertical;
 
     public cardMessage: string = "";
+
+    public genderOptions: string[] = ["Male", "Female"];
 
     constructor(private localStorageService: LocalStorageService) {}
 
@@ -43,7 +41,19 @@ export class PersonsPage implements OnInit {
 
     public onCardModeChanged(isEdit: boolean): void {
         this.cardMessage = isEdit ? "Please, fill in the data" : "Data saved";
+
+        if (this.persons) {
+            this.personOptions = this.persons?.map((person: IPerson) => {
+                return {
+                    title: person.name,
+                    value: person
+                };
+            });
+
+            this.selectedPerson = this.persons.length > 0 ? this.persons[0] : null;
+        }
     }
+
 
     public onSaveClicked(): void {
         console.log("save clicked");
@@ -51,7 +61,7 @@ export class PersonsPage implements OnInit {
     }
 
     // public onClickMeClick(): void {
-    //     this.name = "New data!";
+    //     this.myProperty = "New data!";
     // }
 
 }
