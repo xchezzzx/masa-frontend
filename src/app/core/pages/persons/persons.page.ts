@@ -15,10 +15,10 @@ export class PersonsPage implements OnInit {
     public Layout = Layout;
 
     public personOptions: ISelectableOption<IPerson>[] = [];
-    public selectedPerson: IPerson | null = null;
+    public selectedPersons: IPerson[] = [];
 
     public layoutOptions: ISelectableOption<Layout>[] = [];
-    public selectedPersonLayout: Layout = Layout.Vertical;
+    public selectedPersonLayout: Layout[] = [Layout.Vertical];
 
     public cardMessage: string = "";
 
@@ -45,7 +45,7 @@ export class PersonsPage implements OnInit {
                 };
             });
 
-            this.selectedPerson = this.personService.persons.length > 0 ? this.personService.persons[0] : null;
+            // this.selectedPerson = this.personService.persons.length > 0 ? [this.personService.persons[0]] : null;
         }        
     }
 
